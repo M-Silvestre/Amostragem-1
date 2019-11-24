@@ -1,5 +1,6 @@
+# Questão 02:
 
-**Questão 02:** Considere uma micro-população de tamanho N = 15
+Considere uma micro-população de tamanho N = 15
 e uma sequência de 15 realizações de uma variável uniforme dada
 a seguir. Além disso, admita que o valor da probabilidade de inclusão
 de primeira ordem, para cada elemento dessa micro-população, é dada por
@@ -28,19 +29,19 @@ fornecido no formulário desta prova, e responda o que se pede.
  
  **Implementação:**
  
-$k = 1$: Temos que $\epsilon_{1} = 0.620$ e $\frac{n}{N} =  \frac{6}{15} = 0.4$. Logo, $ k = 1 \notin S$
+$k = 1$: Temos que $\epsilon_{1} = 0.620$ e $\frac{n}{N} =  \frac{6}{15} = 0.4$. Logo, $ k = 1 \notin S$.
 
-$k = 2$: Temos que $\epsilon_{2} = 0.620$ e $\frac{n - n_{k}}{N - k + 1} = \frac{6}{14} = 0.428$. Logo, $ k = 2 \notin S$
+$k = 2$: Temos que $\epsilon_{2} = 0.562$ e $\frac{n - n_{k}}{N - k + 1} = \frac{6}{14} = 0.428$. Logo, $ k = 2 \notin S$.
 
-$k = 3$:
+$k = 3$: Temos que $\epsilon_{3} = 0.392$ e $\frac{n - n_{k}}{N - k + 1} = \frac{6}{13} = 0.461$. Logo, $ k = 3 \in S$.
 
-$k = 4$:
+$k = 4$: Temos que $\epsilon_{4} = 0.203$ e $\frac{n - n_{k}}{N - k + 1} = \frac{5}{12} = 0.417$. Logo, $ k = 4 \in S$.
 
-$k = 5$:
+$k = 5$: Temos que $\epsilon_{5} = 0.689$ e $\frac{n - n_{k}}{N - k + 1} = \frac{4}{11} = 0.364$. Logo, $ k = 5 \notin S$.
 
-$k = 6$:
+$k = 6$: Temos que $\epsilon_{6} = 0.839$ e $\frac{n - n_{k}}{N - k + 1} = \frac{4}{10} = 0.4$. Logo, $ k = 6 \notin S$.
 
-$k = 7$:
+$k = 7$: Temos que $\epsilon_{7} = 0.307$ e $\frac{n - n_{k}}{N - k + 1} = \frac{4}{9} = 0.444$. Logo, $ k = 7 \in S$.
 
 $k = 8$:
  
