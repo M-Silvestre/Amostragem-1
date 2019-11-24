@@ -13,6 +13,7 @@
 Y <- c(8,3,1,11,4,7)
 
 # Tamanhos da população e amostra:
+
 N <- length(Y)
 n <- 2L
 
@@ -132,7 +133,7 @@ sum(valores_vars*as.numeric(table(vars)/length(vars)))
 
 
 # Variância populacional:
-var(Y)
+var_pop <- var(Y); var_pop
 
 # Temos que o valor esperado da variância do estimador da média
 # amostral é igual à variância populacional.
@@ -140,6 +141,26 @@ var(Y)
 
 # F) Obtenha o nível exato do intervalo de confiança contruído
 # para estimar a média populacional.
+
+interv <- function(amostra, alfa = 0.05, N){
+  n <- length(amostra)
+  media <- mean(amostra)
+  variancia <- var(amostra)
+  
+  intervalo <- c(media + qt(alfa/2, n - 1)*sqrt((1 - n/N)*variancia/n),
+                 media + qt(1 - alfa/2, n - 1)*sqrt((1 - n/N)*variancia/n))
+  intervalo
+}
+
+intervalos <- matrix(0, nrow = 1, ncol = 2)
+
+for(i in 1:nrow(amostras)){
+  intervalo <- interv(amostras[i,], N = N)
+  intervalos <- rbind(intervalos, intervalo)
+}
+
+intervalos[-1,]
+
 
 # G) Apresente o valor das probabilidades de inclusão de
 # primeira ordem na população.
