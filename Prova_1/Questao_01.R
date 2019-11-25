@@ -104,6 +104,9 @@ desv <- sqrt(var_est); desv
 eqm_est <- var_est + 0^2; eqm_est
 # > 4.488889
 
+# Temos que a variação dos dados amostrais não é elevada, pois o
+# desvio padrão tem mesma ordem de grandeza dos dados encontrados. 
+
 
 
 # D) --------------------------------------------------------------------
@@ -139,11 +142,12 @@ table(vars)/length(vars)
 # Valor esperado:
 valores_vars <- c(0.5, 2, 4.5, 8, 12.5, 18, 24.5, 32, 50)
 sum(valores_vars*as.numeric(table(vars)/length(vars)))
-# >  13.46667
+# >[1] 13.46667
 
 
 # Variância populacional:
 var_pop <- var(Y); var_pop
+# [1] 13.46667
 
 # Temos que o valor esperado da variância do estimador da média
 # amostral é igual à variância populacional.

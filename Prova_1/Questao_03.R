@@ -33,12 +33,10 @@ hist(Y_amostral, main = "Idade de crianças ao andar pela primeira vez",
 # média concentradas em intervalo pequeno, de 9.00 a 12.08, em comparação ao
 # intervalo com as observações acima da média, de 12.08 a 20.00.
 
-# No entanto, é de se esperar que a distribuição das médias amostrais não siga
-# esse padrão. Pelo Teorema Central do Limite, a soma de variáveis aleatórias
-# se assemelha ao comportamento de uma v.a. Normal quando o tamanho da
-# amostra é suficientemente grande. Logo, a média, que é baseada na soma das
-# observações, também terá comportamento semelhante a uma v.a. Normal,
-# que é simétrica em relação à média.
+# Além disso, como a variável não segue uma normalidade, o Teorema Central
+# do Limite não é aplicável, pois a estatística provavelmente também tem
+# comportamento assimétrico em relação à media.
+
 
 
 # B) ----------------------------------------------------------------------
@@ -59,10 +57,11 @@ media_amostral <- mean(Y_amostral); media_amostral
 # desvio padrão da média amostral (erro padrão), considerando o nível de
 # confiança de 95%. Interprete o intervalo obtido.
 
+
 est_var_est <- (1 - n/N)*var(Y_amostral)/n; est_var_est
 # [1] 0.01358501
 
-est_desvio_est <- sqrt(var_amostral); est_desvio_est
+est_desvio_est <- sqrt(est_var_est); est_desvio_est
 # [1] 0.1165548
 
 # Intervalo de confiança para a média populacional (com variância populacional

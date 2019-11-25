@@ -62,4 +62,4 @@ est_var_HT <- (1 - n/N)*var(Y_amostral)/n; est_var_HT
 
 # Temos que o estimador de Hansen-Hurwitz apresenta variância maior que o
 # estimador Horvitz-Thompson. Portanto, no caso estudado, o estimador HT é
-# mais desejável do que o HH em termos de consistência.
+# mais desejável do que o HH em termos de eficiência.
