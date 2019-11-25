@@ -5,7 +5,9 @@
 # uma variável de interesse, denota por Y. são dados por :8, 3, 1, 11, 4, 7.
 # Com base nesta informação, responda o que se pede a seguir, utilizando o R.
 
-# A) Obtenha todas as possíveis médias amostrais, considerando todas as possíveis
+# A) -------------------------------------------------------------------------
+
+# Obtenha todas as possíveis médias amostrais, considerando todas as possíveis
 # amostras de tamnho n = 2, sob um plano de amostragem aleatória simples em
 # reposição. Apresente a distribuição amostral destas médias.
 
@@ -51,12 +53,15 @@ table(medias)/length(medias)
 # 0.13333333  0.13333333  0.06666667  0.13333333  0.06666667 0.06666667 
 
 
-# B) Considerando o item A), mostre que o estimador da média amostral
+
+# B) --------------------------------------------------------------------
+# Considerando o item A), mostre que o estimador da média amostral
 # é centrado para a média populacional.
 
 # Valores que a média amostral assume:
 valores_media <- c(2, 2.5, 3.5, 4, 4.5, 5,
                    5.5, 6, 7, 7.5, 9, 9.5)
+
 # Probabilidades associadas a cada valor:
 probs_media <- as.numeric(table(medias)/length(medias)); probs_media
 
@@ -73,7 +78,9 @@ mean(Y)
 # centrado.
 
 
-# C) Ainda considerando o item A), apresente a variância do
+# C) ---------------------------------------------------------------
+
+# Ainda considerando o item A), apresente a variância do
 # estimador da média, seu desvio padrão, e seu erro quadrático
 # médio. Qual é sua conclusão?
 
@@ -98,7 +105,9 @@ eqm_est <- var_est + 0^2; eqm_est
 # > 4.488889
 
 
-# D) Compare a fórmula da variância encontrada no item C) com a
+
+# D) --------------------------------------------------------------------
+# Compare a fórmula da variância encontrada no item C) com a
 # fórmula da variância do estimador da média sob o plano de amostragem
 # aleatória simples. Qual é a sua conclusão?
 
@@ -106,12 +115,13 @@ eqm_est <- var_est + 0^2; eqm_est
 var_form <- (1 - n/N)*(var(Y))/n; var_form
 # > 4.488889
 
-# Temos que os valores obtidos são iguais. Podemos concluir que
+# Temos que os valores obtidos são iguais. 
 
 
 
+# E) -----------------------------------------------------------------
 
-# E) Considerando as mesmas amostras obtidas em A), calcule a
+# Considerando as mesmas amostras obtidas em A), calcule a
 # variância amostral das observações de cada uma das amostras.
 # Verfique se seu valor esperado é igual à variância populacional.
 
@@ -139,10 +149,14 @@ var_pop <- var(Y); var_pop
 # amostral é igual à variância populacional.
 
 
-# F) Obtenha o nível exato do intervalo de confiança contruído
+
+# F) -----------------------------------------------------------------
+
+# Obtenha o nível exato do intervalo de confiança contruído
 # para estimar a média populacional.
 
-interv <- function(amostra, alfa = 0.05, N){
+# Função que gera intervalos de confiança para a média:
+interv <- function(amostra, alfa = 0.1, N = 6){
   n <- length(amostra)
   media <- mean(amostra)
   variancia <- var(amostra)
@@ -152,17 +166,35 @@ interv <- function(amostra, alfa = 0.05, N){
   intervalo
 }
 
-intervalos <- matrix(0, nrow = 1, ncol = 2)
 
-for(i in 1:nrow(amostras)){
-  intervalo <- interv(amostras[i,], N = N)
-  intervalos <- rbind(intervalos, intervalo)
+intervalos <- t(apply(amostras, 1, interv)); intervalos
+
+
+# Valor real:
+media_pop <- mean(Y)
+
+# Número de intervalos que contêm o valor real da média populacional:
+x <- NULL
+
+for(i in 1:15){
+  if((intervalos[i,1] < media_pop) & (intervalos[i,2] > media_pop))
+    x <- c(x,1)
+  else
+    x <- c(x,0)
 }
+sum(x)
+# Proporção de intervalos que contêm o valor real do parâmetro:
+sum(x)/length(x)
+# > [1] 1
 
-intervalos[-1,]
+# Temos que 100% dos intervalos de confiança de 90% para a média
+# populacional contêm o verdadeiro valor do parâmetro.
 
 
-# G) Apresente o valor das probabilidades de inclusão de
+
+# G) ---------------------------------------------------------------
+
+# Apresente o valor das probabilidades de inclusão de
 # primeira ordem na população.
 
 library(TeachingSampling)
@@ -178,7 +210,22 @@ probs_amostras <- rep(1/15, length.out = 15); probs_amostras
 # da população:
 Pik(probs_amostras, ind)
 
-# H) Apresente o valor das probabilidades de inclusão de segunda
+# >          [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
+# [1,] 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333
+
+
+
+# H) -------------------------------------------------------------------
+
+# Apresente o valor das probabilidades de inclusão de segunda
 # ordem na população.
 
 Pikl(N, n, probs_amostras)
+
+#            [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
+# [1,] 0.33333333 0.06666667 0.06666667 0.06666667 0.06666667 0.06666667
+# [2,] 0.06666667 0.33333333 0.06666667 0.06666667 0.06666667 0.06666667
+# [3,] 0.06666667 0.06666667 0.33333333 0.06666667 0.06666667 0.06666667
+# [4,] 0.06666667 0.06666667 0.06666667 0.33333333 0.06666667 0.06666667
+# [5,] 0.06666667 0.06666667 0.06666667 0.06666667 0.33333333 0.06666667
+# [6,] 0.06666667 0.06666667 0.06666667 0.06666667 0.06666667 0.33333333

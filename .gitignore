@@ -2,3 +2,5 @@
 *.PNG
 *.RData
 *.Rhistory
+*.txt
+*.ipynb_checkpoints
